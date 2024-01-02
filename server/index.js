@@ -6,7 +6,7 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-const PORT  = process.env.PORT || 8080 
+const PORT  = process.env.PORT
 mongoose.connect("mongodb+srv://ajith1323:Achanamma@cluster0.3jql3om.mongodb.net/Vendors?retryWrites=true&w=majority")
 .then(()=>{
     console.log("connect to DB")
