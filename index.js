@@ -96,11 +96,15 @@ app.delete("/delete/:id",async(req,res)=>{
     res.send({success : true, message : "data delete successfully", data : data})
 })
 
-const path = require('path');
-app.use(express.static(path.join(__dirname,'./client/build')));
-app.get('/*',function(req,res){
-    res.sendFile(path.join(__dirname,'./client/build/index.html'));
-});
 
+app.use(express.static(path.join(__dirname, "./client/build")));
+app.get("*", function (_, res) {
+  res.sendFile(
+    path.join(__dirname, "./client/build/index.html"),
+    function (err) {
+      res.status(500).send(err);
+    }
+  );
+});
 
 
