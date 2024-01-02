@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import axios from "axios";
 import Formtable from './components/Formtable';
 import Login from './Login';
-axios.defaults.baseURL = "http://localhost:8080/";
+axios.defaults.baseURL = "/";
 
 function Home() {
   const [addSection, setAddSection] = useState(false);
