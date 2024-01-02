@@ -6,7 +6,7 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-const PORT  = process.env.PORT
+const PORT  = process.env.PORT||3000
 mongoose.connect("mongodb+srv://ajith1323:Achanamma@cluster0.3jql3om.mongodb.net/Vendors?retryWrites=true&w=majority")
 .then(()=>{
     console.log("connect to DB")
@@ -42,6 +42,13 @@ const DetailsSchema = new Schema({
     }
 })
 const VendorData=mongoose.model('VendorData',DetailsSchema)
+
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+// The "catchall" handler: for any request that doesn't match one above, send back React's index.html file.
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
 
 // read
 // ​ http://localhost:8080/
@@ -97,14 +104,6 @@ app.delete("/delete/:id",async(req,res)=>{
 })
 
 
-app.use(express.static(path.join(__dirname, "./client/build")));
-app.get("*", function (_, res) {
-  res.sendFile(
-    path.join(__dirname, "./client/build/index.html"),
-    function (err) {
-      res.status(500).send(err);
-    }
-  );
-});
+
 
 
