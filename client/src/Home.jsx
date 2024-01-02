@@ -64,7 +64,7 @@ function Home() {
       }
   }
   const getFetchData = async()=>{
-    const data = await axios.get("/")
+    const data = await axios.get("/vendor")
     console.log(data)
     if(data.data.success){
         setDataList(data.data.data)

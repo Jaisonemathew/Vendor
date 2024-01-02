@@ -52,7 +52,7 @@ app.get('*', (req, res) => {
 
 // read
 // ​ http://localhost:8080/
-app.get("/",async(req,res)=>{
+app.get("/vendor",async(req,res)=>{
     const data = await VendorData.find({})
     res.json({success : true , data : data})
 })  
