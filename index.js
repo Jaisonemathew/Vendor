@@ -6,7 +6,7 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-const PORT  = process.env.PORT
+const PORT  = process.env.PORT||4000
 mongoose.connect("mongodb+srv://ajith1323:Achanamma@cluster0.3jql3om.mongodb.net/Vendors?retryWrites=true&w=majority")
 .then(()=>{
     console.log("connect to DB")
@@ -45,10 +45,6 @@ const VendorData=mongoose.model('VendorData',DetailsSchema)
 
 app.use(express.static(path.join(__dirname, 'client/build')));
 
-// The "catchall" handler: for any request that doesn't match one above, send back React's index.html file.
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname+'/client/build/index.html'));
-});
 
 // read
 // ​ http://localhost:8080/
@@ -56,6 +52,12 @@ app.get("/vendor",async(req,res)=>{
     const data = await VendorData.find({})
     res.json({success : true , data : data})
 })  
+
+// The "catchall" handler: for any request that doesn't match one above, send back React's index.html file.
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
+
 
 
 //create data || save data in mongodb
